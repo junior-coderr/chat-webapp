@@ -1,0 +1,28 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    transition-duration: 150ms;
+}
+body{
+    background-color: #59C7FF;
+}
+.max-width{
+    max-width: 1200px;
+    /* text-align: center; */
+    margin: auto;
+    padding:0 25px;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+input{
+    width: 100%;
+    padding: 12px 20px;
+    outline: none;
+    border-radius: 50px;
+    background-color: white;
+    /* border: 1px solid rgba(0, 0, 0, 0.56); */
+}

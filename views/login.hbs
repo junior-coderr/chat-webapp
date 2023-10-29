@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="css/general.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Document</title>
+</head>
+<body>
+  <div class="max-width bg-[white] h-screen stopHeight:min-h-[650px]">
+  <div class="w-full px-10 h-[100%] flex flex-col justify-center bg-white items-center gap-10 overflow-auto stopHeight:gap-0 stopHeight:min-h-[650px]">
+    {{!-- section 1 --}}
+    <div class=" h-[100%] flex justify-center items-end stopHeight:h-auto">
+
+    <div class="text-4xl font-semibold text-cente pb-10">Login</div>
+
+    </div>
+
+
+    {{!-- section 2 --}}
+    <div class=" h-[100%] flex justify-center items-center stopHeight:h-auto">
+
+    <div class="w-[250px] bg-[#1ab3ff] p-10 rounded-[12px] sm:w-[300px] md:w-[360px]">
+      <form action="#" class="flex flex-col justify-center items-center w-[100%] gap-5">
+
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="password">
+        <div>
+          <br>
+        <input class="bg-white text-slate-700 cursor-pointer text-center p-2 px-12" type="submit" value="Next" name="submit">
+        </div>
+      </form>
+    </div>
+
+    </div>
+
+    {{!-- section 3 --}}
+  <div class=" h-[100%] stopHeight:h-auto">
+    <div class="pt-10 flex flex-col justify-center items-center gap-4">
+      <h2>Dont have an account?</h2>
+      <h2 class="bg-[#1ab3ff] p-2 px-5 rounded-[3px] font-semibold text-[#ffffffe0] cursor-pointer">Sign up</h2>
+    </div>
+  </div>
+
+
+  </div>
+  </div>
+<script src="js/general.js"></script>
+</body>
+</html>
