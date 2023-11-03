@@ -19,6 +19,11 @@ function close_msg(){
   loaderContainer.style.display='none';
 }
 
+function close_username(){
+  pop_close('.username-container');
+  loaderContainer.style.display='none';
+}
+
 
 
 function signupSubmit(event){
@@ -34,7 +39,8 @@ function signupSubmit(event){
     password:password.value
   }
 
-  // if(validator.isEmail(data.email)){
+  if(!validator.isEmpty(data.fname,{ignore_whitespace: true})&&!validator.isEmpty(data.lname,{ignore_whitespace: true})&&!validator.isEmpty(data.password,{ignore_whitespace: true})){
+    if(validator.isEmail(data.email)){
 
   fetch('http://localhost:3000/signup',{
     method: 'POST',
@@ -47,7 +53,7 @@ function signupSubmit(event){
   .then(res=>{
 
     console.log('res');
-    if(res.status=='true'){
+    if(res.status){
     window.location.href = res.next;
     pop_close('.lds-ellipsis');
     loaderContainer.style.display='none';
@@ -57,7 +63,7 @@ console.log('going good')
     pop_close('.msg');
     pop_close('.lds-ellipsis');
 
-    // actual_msg.innerText=res.err;
+    actual_msg.innerText=res.err;
     loaderContainer.style.display='flex';
     console.log('error -2');
     }
@@ -68,11 +74,25 @@ console.log('going good')
 
   actual_msg.innerText='Something went wrong';
   loaderContainer.style.display='flex';
-  console.log('error');
+  console.log('error in');
   });
 
+    }else{
+      pop_close('.lds-ellipsis');
+      pop_close('.msg');
+    
+      actual_msg.innerText='please enter the valid email address!';
+      loaderContainer.style.display='flex';
+      console.log('error');
+    }
 
+}else{
+  pop_close('.lds-ellipsis');
+  pop_close('.msg');
 
-// }
+  actual_msg.innerText='Please fill out all the fields properly!';
+  loaderContainer.style.display='flex';
+  console.log('error');
+}
 
   }

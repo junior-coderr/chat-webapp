@@ -23,7 +23,7 @@ function login(event){
     loaderContainer.style.display='flex';
     pop_close('.lds-ellipsis');
 
-
+    if(validator.isEmail(email.value)){
     fetch('http://localhost:3000/login',{
         method: 'POST',
         headers: {
@@ -45,9 +45,15 @@ function login(event){
             pop_close('.lds-ellipsis');
             loaderContainer.style.display='flex';
             pop_close('.msg');
-            actual_msg.innerText="Invalid Credentials"
+            actual_msg.innerText=data.err
         }
     })
 
+    }else{
+        pop_close('.lds-ellipsis');
+        loaderContainer.style.display='flex';
+        pop_close('.msg');
+        actual_msg.innerText="please enter a valid email address";
+    }
 
 }

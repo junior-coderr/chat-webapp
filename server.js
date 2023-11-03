@@ -1,11 +1,13 @@
 require('dotenv').config();
 
 const express = require('express');
+const session = require('express-session');
 const { createServer } = require('node:http');
 const path = require('path');
 const { Server } = require("socket.io");
 const ejs = require('ejs');
 const mongoose = require('mongoose');
+const destroySession = require('./middleware/destroySession');
 
 
 
@@ -15,7 +17,14 @@ const server = createServer(app);
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-
+app.use(session({
+    secret:'secrete',
+    resave:false,
+    saveUninitialized: false,
+    cookie:{
+        maxAge: 360000
+    }
+}))
 
 app.use(express.static(path.join(__dirname,'public')));
 app.set('view engine','ejs');
@@ -48,16 +57,16 @@ app.post('/signup',async (req,res)=>{
             email: req.body.email,
             password: req.body.password
         }
-        console.log('pdon');
+        // console.log('pdon');
         const user = await userModel.create(userData);
         console.log(user);
-        setTimeout(() => {
-        res.status(201).json({...user,next:'/login',status: 'true'});
-        }, 3000);
+        
+        res.status(201).json({...user,next:'/login',status:true});
+        
     }
     catch(err){
         console.log(err.message);
-        res.status(201).json({err:err.message,status: 'false'});
+        res.status(201).json({err:'This email is already used!',status: false});
         console.log('err')
     }
 
@@ -72,19 +81,26 @@ app.post('/login',async (req,res)=>{
 
         const user = await userModel.findOne(userData);
         console.log(user);
-        
+        console.log('p');
         if(user==null) {
 
-            res.status(201).json({next:'/login',status: false});
+            res.status(201).json({err:'Invalid credentials!',next:'/login',status: false});
         }else{
+            req.session.user = {
+                email: userData.email,
+                password: userData.password
+            }
+
+            console.log(req.session.user);
 
             res.status(201).json({next:'/',status: true});
+            
         }
         
     }
     catch(err){
         console.log(err.message);
-        res.status(400).json({err:err.message,status: 'false'});
+        res.status(400).json({err:'Something went wrong!',status: false});
         console.log('err')
     }
 
@@ -94,7 +110,7 @@ app.get('/',userAuth,(req,res)=>{
     res.render('index');
 }); 
 
-app.get('/login',(req,res)=>{
+app.get('/login',destroySession,(req,res)=>{
     res.render('login');
 }); 
 

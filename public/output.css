@@ -550,6 +550,11 @@ video {
   top: 0px;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .flex {
   display: flex;
 }
@@ -574,6 +579,10 @@ video {
   height: 100vh;
 }
 
+.h-\[300px\] {
+  height: 300px;
+}
+
 .w-\[100\%\] {
   width: 100%;
 }
@@ -588,6 +597,23 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[\] {
+  width: ;
+}
+
+.w-\[2\] {
+  width: 2;
+}
+
+.w-\[280px\] {
+  width: 280px;
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .cursor-pointer {
@@ -658,6 +684,18 @@ video {
   border-radius: 0.5rem;
 }
 
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-sm {
+  border-radius: 0.125rem;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
 .bg-\[\#00A9FF\] {
   --tw-bg-opacity: 1;
   background-color: rgb(0 169 255 / var(--tw-bg-opacity));
@@ -683,6 +721,90 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#9a7474\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(154 116 116 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#ff6e6e\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 110 110 / var(--tw-bg-opacity));
+}
+
+.bg-red-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#8e8e8e\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(142 142 142 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#8e8e8e68\] {
+  background-color: #8e8e8e68;
+}
+
+.bg-\[\#8e8e8e10\] {
+  background-color: #8e8e8e10;
+}
+
+.bg-\[\#8e8e8e21\] {
+  background-color: #8e8e8e21;
+}
+
+.bg-\[\#00000021\] {
+  background-color: #00000021;
+}
+
+.bg-\[\#00000030\] {
+  background-color: #00000030;
+}
+
+.bg-\[\#\#1ab3ff\] {
+  background-color: ##1ab3ff;
+}
+
+.bg-\[\#1ab3ff3b\] {
+  background-color: #1ab3ff3b;
+}
+
+.bg-\[\#1ab3ff24\] {
+  background-color: #1ab3ff24;
+}
+
+.bg-\[\#1ab3ff42\] {
+  background-color: #1ab3ff42;
+}
+
+.bg-\[\#00000042\] {
+  background-color: #00000042;
+}
+
+.bg-\[\#00000020\] {
+  background-color: #00000020;
+}
+
+.bg-\[\#00000011\] {
+  background-color: #00000011;
+}
+
+.bg-\[\#ffffff11\] {
+  background-color: #ffffff11;
+}
+
+.bg-\[\#ffffffb5\] {
+  background-color: #ffffffb5;
+}
+
+.bg-\[\#ffffffd9\] {
+  background-color: #ffffffd9;
+}
+
+.bg-\[\#fffffff3\] {
+  background-color: #fffffff3;
+}
+
 .p-10 {
   padding: 2.5rem;
 }
@@ -699,6 +821,14 @@ video {
   padding: 1.25rem;
 }
 
+.p-1 {
+  padding: 0.25rem;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -712,6 +842,11 @@ video {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .pb-10 {
@@ -746,6 +881,18 @@ video {
   line-height: 1.75rem;
 }
 
+.text-\[20px\] {
+  font-size: 20px;
+}
+
+.text-\[24px\] {
+  font-size: 24px;
+}
+
+.text-\[23px\] {
+  font-size: 23px;
+}
+
 .font-semibold {
   font-weight: 600;
 }
@@ -762,6 +909,80 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.text-\[white\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[\#ffffffb6\] {
+  color: #ffffffb6;
+}
+
+.text-\[\#d3d3d3b6\] {
+  color: #d3d3d3b6;
+}
+
+.text-\[\#ffffffc7\] {
+  color: #ffffffc7;
+}
+
+.placeholder\:text-black::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-black::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-\[\]::-moz-placeholder {
+  color: ;
+}
+
+.placeholder\:text-\[\]::placeholder {
+  color: ;
+}
+
+.placeholder\:text-\[black\]::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-\[black\]::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-\[\#0000006b\]::-moz-placeholder {
+  color: #0000006b;
+}
+
+.placeholder\:text-\[\#0000006b\]::placeholder {
+  color: #0000006b;
+}
+
+.placeholder\:text-\[\#0000008f\]::-moz-placeholder {
+  color: #0000008f;
+}
+
+.placeholder\:text-\[\#0000008f\]::placeholder {
+  color: #0000008f;
+}
+
+.placeholder\:text-\[\#00000061\]::-moz-placeholder {
+  color: #00000061;
+}
+
+.placeholder\:text-\[\#00000061\]::placeholder {
+  color: #00000061;
 }
 
 @media (min-width: 650px) {

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="output.css">
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <!-- <script src="https://unpkg.com/validator@latest/validator.min.js"></script> -->
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <title>Document</title>
 </head>
@@ -64,12 +64,28 @@
         <h1 class="text-2xl font-semibold">Oops!</h1>
       </div>
       <div class="h-[100%] flex justify-center items-center">
-        <p class="text-xl actual_msg">message </p>
+        <p class="text-xl actual_msg text-center">message </p>
       </div>
 
     </div>
 
-  <div class="lds-ellipsis hidden"><div></div><div></div><div></div><div></div></div>
+    <div class="username-container w-[280px] h-[300px] bg-[#f0f0f0] p-5 relative rounded-lg flex flex-col justify-start hidden">
+      <span class="absolute right-0 top-0 p-2 text-xl" onclick="close_username()">
+        <i class="bi bi-x"></i>
+      </span>
+
+    <h1 class="font-semibold text-center text-[23px]">Set a Username</h1>
+    <br>
+    <br>
+    <input type="text" name="username" class="username-inp bg-[#fffffff3] text-black placeholder:text-[#00000061]" placeholder="ex:pratik_98">
+    <br>
+    <span class="user-msg text-center">message</span>
+    <br>
+    <br>
+    <button class="bg-[#1ab3ff] w-fit mx-auto p-2 px-5 rounded-md text-[#ffffffc7] font-semibold" onclick="actual_submit()">Keep</button>
+    </div>
+
+    <div class="lds-ellipsis hidden"><div></div><div></div><div></div><div></div></div>
   </div>
 
 <script src="js/general.js"></script>
