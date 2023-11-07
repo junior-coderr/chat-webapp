@@ -24,7 +24,7 @@
     <!-- {{!-- section 2 --}} -->
     <div class=" h-[100%] flex justify-center items-center stopHeight:h-auto">
 
-    <div class="w-[250px] bg-[#1ab3ff] p-10 rounded-[12px] sm:w-[300px] md:w-[360px]">
+    <div class="w-[250px] bg-[#216FB6] p-10 rounded-[12px] sm:w-[300px] md:w-[360px]">
 <!-- {{!-- onsubmit="return signupSubmit(this)" --}} -->
       <form action="/signup" method="post" onsubmit="signupSubmit(event)" class="flex flex-col justify-center items-center w-[100%] gap-5">
         <input type="text" class="fname" name="fname" required placeholder="First name">
@@ -44,7 +44,7 @@
   <div class=" h-[100%] stopHeight:h-auto">
     <div class="pt-10 flex flex-col justify-center items-center gap-4">
       <h2>Already have an account</h2>
-      <a href="/login" class="bg-[#1ab3ff] p-2 px-5 rounded-[3px] font-semibold text-[#ffffffe0] cursor-pointer">Login</a>
+      <a href="/login" class="bg-[#216FB6] p-2 px-5 rounded-[3px] font-semibold text-[#ffffffe0] cursor-pointer">Login</a>
     </div>
   </div>
 
@@ -54,6 +54,7 @@
 
   <div class="loader-container">
 
+    <!-- //custon message -->
     <div class="w-[250px] h-[250px] bg-[#f0f0f0] p-5 relative rounded-lg flex flex-col justify-start hidden msg">
       
       <span class="absolute right-0 top-0 p-2 text-xl" onclick="close_msg()">
@@ -69,6 +70,7 @@
 
     </div>
 
+    <!-- username container  -->
     <div class="username-container w-[280px] h-[300px] bg-[#f0f0f0] p-5 relative rounded-lg flex flex-col justify-start hidden">
       <span class="absolute right-0 top-0 p-2 text-xl" onclick="close_username()">
         <i class="bi bi-x"></i>
@@ -79,12 +81,13 @@
     <br>
     <input type="text" name="username" class="username-inp bg-[#fffffff3] text-black placeholder:text-[#00000061]" placeholder="ex:pratik_98">
     <br>
-    <span class="user-msg text-center">message</span>
+    <span class="user-msg text-center text-rose-500"></span>
     <br>
     <br>
-    <button class="bg-[#1ab3ff] w-fit mx-auto p-2 px-5 rounded-md text-[#ffffffc7] font-semibold" onclick="actual_submit()">Keep</button>
+    <button class="bg-[#216FB6] w-fit mx-auto p-2 px-5 rounded-md text-[#ffffff] font-semibold" onclick="usernameCheck()">Keep</button>
     </div>
 
+    <!-- loading anim  -->
     <div class="lds-ellipsis hidden"><div></div><div></div><div></div><div></div></div>
   </div>
 

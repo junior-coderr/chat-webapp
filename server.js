@@ -49,13 +49,32 @@ app.get('/signup',(req,res)=>{
     res.render('signup');
 }); 
 
+app.post('/username',async (req,res)=>{
+    const user = await userModel.findOne({username:req.body.username});
+    if(user){
+        res.json({isThere: true})
+    }else{
+        res.json({isThere: false})
+    }
+});
+
+app.post('/email',async (req,res)=>{
+    const user = await userModel.findOne({email:req.body.email});
+    if(user){
+        res.json({isThere: true})
+    }else{
+        res.json({isThere: false})
+    }
+});
+
 app.post('/signup',async (req,res)=>{
     try{
         let userData = {
             firstname: req.body.fname,
             lastname: req.body.lname,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            username: req.body.username
         }
         // console.log('pdon');
         const user = await userModel.create(userData);
@@ -88,7 +107,8 @@ app.post('/login',async (req,res)=>{
         }else{
             req.session.user = {
                 email: userData.email,
-                password: userData.password
+                fname:user.firstname,
+                lname:user.lastname,
             }
 
             console.log(req.session.user);
@@ -107,32 +127,74 @@ app.post('/login',async (req,res)=>{
 }); 
 
 app.get('/',userAuth,(req,res)=>{
-    res.render('index');
+    let d = 'p';
+    // req.session.user.fname
+    res.render('index',{name:d});
 }); 
+
+app.post('/logout',(req,res)=>{
+    req.session.destroy((err)=>{
+        if(err){
+            console.log(err);
+            console.log('failed');
+            res.status(401).json({next:'/',status: false});
+        }else{
+            console.log('success')
+            res.status(201).json({next:'/login',status: true});
+        }
+    })
+
+})
 
 app.get('/login',destroySession,(req,res)=>{
     res.render('login');
 }); 
 
 
-const io = new Server(server);
+app.post('/user/search',async (req,res)=>{
+    try{
+  let user = await userModel.findOne({username:req.body.username});
+  console.log(user);
 
-io.on('connection',(socket)=>{
-    socket.on('message',(msg)=>{
-        console.log(msg);
-        socket.broadcast.emit('message',msg);
-
+  if(user){
+  res.json({
+    status: 'success',
+    username:user.username,
+    firstname:user.firstname,
+    lastname:user.lastname,
+});
+  }else{
+    res.json({
+       status:'failed'
     });
-    
-    socket.on('disconnect',()=>{
-        console.log('user disconnected');
-    
-    });
+  }
+}catch(e){
+res.json({status:'Something went wrong',})
+}
+})
 
-    socket.emit('back','returned message!');
-    io.to(socket.id).emit('backSame','messss');
+
+const io = new Server(server,{
+    cors:{
+        origin:'*',
+    },
+    connectionStateRecovery: {
+        maxDisconnectionDuration: 2 * 60 * 1000,
+        skipMiddlewares: true,
+    }
 
 });
+
+io.on('connection',(socket)=>{
+
+console.log('new connection  id: ' + socket.id);
+});
+
+// setInterval(() => {
+// io.emit('ping','data'+Math.random()+100);
+// },1000);
+
+
 
 server.listen(3000,()=>{
     console.log('listening on port 3000');

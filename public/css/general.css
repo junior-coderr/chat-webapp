@@ -5,9 +5,11 @@
     transition-duration: 150ms;
 }
 body{
-    background-color: #59C7FF;
+    background-color: #216FB6;
 }
 .max-width{
+    width: 100%;
+    position: relative;
     max-width: 1200px;
     /* text-align: center; */
     margin: auto;
@@ -27,10 +29,28 @@ input{
     /* border: 1px solid rgba(0, 0, 0, 0.56); */
 }
 
+
+.oc-page-anim{
+transform: translateX(100%);
+z-index: -1; 
+/* transform: ; */
+/* transition-duration: 1s; */
+ /* transition-duration: 200ms;
+ */
+ /* transition-duration: 2s; */
+ /* top: 100%; */
+}
+
+.search-container{
+}
+
+.user{
+  display: none;
+}
 /* loader animation  */
 
 .loader-container{
-    background-color: rgba(0, 0, 0, 0.371);
+    background-color: #0000005f;
     position: fixed;
     top: 0;
     left: 0;

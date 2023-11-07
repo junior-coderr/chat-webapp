@@ -19,6 +19,11 @@ const userSchema = new mongoose.Schema({
         required:true,
         minlength:8,
     },
+    username:{
+        type:String,
+        required:true,
+        unique:[true,'This username is already taken'],
+    },
     }, {timestamps:true});
 
 const userModel = mongoose.model('user',userSchema);

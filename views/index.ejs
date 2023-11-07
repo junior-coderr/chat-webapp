@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="output.css">
     <link rel="stylesheet" href="css/general.css">
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <title>Document</title>
 </head>
@@ -15,14 +16,14 @@
 
                 <!-- {{!-- section 1 --}} -->
                 <div class="flex justify-between p-3">
-                    <div class="flex items-baseline gap-1"><span class="text-2xl sm:text-3xl">Hey, </span><h2 class="text-3xl sm:text-4xl">Pratik</h2></div>
-                    <div class="flex items-center cursor-pointer"><i class="bi bi-search text-xl md:text-2xl"></i></div>
+                    <div class="flex items-baseline gap-1"><span class="text-2xl sm:text-3xl">Hey, </span><h2 class="text-3xl sm:text-4xl"><%= name %></h2></div>
+                    <div class="flex items-center gap-8 cursor-pointer"><i class="bi bi-box-arrow-left text-2xl md:text-3xl" onclick="logout()"></i> <i onclick="oc_page('.search-container','open')" class="bi bi-search text-xl md:text-2xl"></i></div>
                 </div>
 
                 <!-- {{!-- section 2  --}} -->
                 <div class="h-screen">
                     <div class="h-[100%] flex flex-col justify-center items-center">
-                        <div class="bg-[#00A9FF] w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] center rounded-full cursor-pointer">
+                        <div onclick="oc_page('.search-container','open')" class="bg-[#216FB6] w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] center rounded-full cursor-pointer">
                         <i class="bi bi-plus-lg text-white text-3xl sm:text-5xl"></i>
                         </div>
                     </div>
@@ -30,7 +31,142 @@
 
         </div>
   </div>
+
+
+  <div class="loader-container">
+
+    <div class="lds-ellipsis hidden"><div></div><div></div><div></div><div></div></div>
+
+
+<!-- custon message -->
+<div class="w-[250px] h-[250px] bg-[#f0f0f0] p-5 relative rounded-lg flex flex-col justify-start msg hidden">
+      
+    <span class="absolute right-0 top-0 p-2 text-xl" onclick="close_msg()">
+      <i class="bi bi-x"></i>
+    </span>
+
+    <div class="text-center">
+      <h1 class="text-2xl font-semibold">Oops!</h1>
+    </div>
+    <div class="h-[100%] flex justify-center items-center">
+      <p class="text-xl actual_msg text-center">message </p>
+    </div>
+
+  </div>
+
+
+
+
+<!-- virtual pages section  -->
+    <div class="w-[100%] virtual-page-section p-0 h-[100%] bg-[#216FB6] hidden">
+    <div class="max-width p-0 m-0 h-[100%]" style="padding:0;">
+
+
+
+
+
+        <!-- search section  -->
+    <div class="search-container absolute w-[100%] h-[100%] bg-[white] oc-page-anim">
+
+        <div class="back-container p-5 py-3">
+            <i class="bi bi-chevron-left cursor-pointer text-[20px] sm:text-[28px] font-bold" onclick="oc_page('.search-container','close')"></i>
+        </div>
+
+
+        <div class="inp-container p-5 relative flex justify-center items-center">
+           
+            <input type="text" placeholder="Username" class="bg-[#eeeeee] w-[100%] max-w-[450px] rounded-lg rounded-r-none border-solid border-[1px] h-[50px] border-[#00000023] username_search_inp">
+            
+            <i onclick="search_user()" class="bi bi-search bg-[#216FB6] cursor-pointer text-white rounded-r-lg w-[60px] flex justify-center items-center right-0 h-[50px] text-center"></i>
+        </div>
+
+
+        <div class="userlist-container p-5 w-[100%] max-w-[510px] m-auto">
+
+            <!-- loader  -->
+            <div class="dynamic-custom-message absolute max-w-[510px] w-[100%] flex justify-center items-start bg-[#00000000] z-10 rounded-md hidden">
+                <div class="lds-ellipsis bg-[#0000001e] rounded-full "><div></div><div></div><div></div><div></div></div>
+            </div>
+            <!-- loader  -->
+
+                <!-- users lsit  -->
+                    <div onclick="virtual_oc_page('.search-container','.user-container')" class="w-[100%] user max-w-[510px] m-auto flex justify-start items-center gap-4 p-2 px-4 cursor-pointer hover:bg-[#00000012] rounded-md bg-[#0000000b]">
+                        <i class="bi bi-person-fill text-[#216FB6] text-[40px]"></i> <div>
+                            <h3 class="text-[20px] font-semibold name opacity-75">Pratik Mishra</h3>
+                            <p class="username text-[14px]">username</p>
+                        </div>
+                    </div>
+                <!-- users lsit  -->
+
+                <!-- no user found  -->
+                <div>
+                    <h1 class="text-[25px] text-[#00000062] font-semibold text-center no-user-found"></h1>
+                </div>
+                <!-- no user found  -->
+                
+
+        </div>
+
+    </div>
+        <!-- search section  -->
+
+
+
+
+        <!-- user section  -->
+        <div class="user-container absolute w-[100%] h-[100%] bg-white oc-page-anim">
+        
+            <div class="back-container p-5 py-3 flex justify-start items-center gap-3 w-[100%]">
+                <i class="bi bi-chevron-left cursor-pointer text-[20px] sm:text-[28px] font-bold" onclick="virtual_oc_page('.user-container','.search-container')"></i>
+                <span class="n text-[19px]"></span>
+            </div>
+
+
+            <!-- message and input section in chat interface -->
+            <div class="w-[100%] h-[100%]">
+               
+                <!-- message section  -->
+                <div>
+                    <!-- reciever message  -->
+                    <div></div>
+                    <!-- reciever message  -->
+                    
+                    <!-- sender message  -->
+                    <div></div>
+                    <!-- sender message  -->
+
+                </div>
+                <!-- message section  -->
+
+
+
+                <!-- input section  -->
+                <div class="w-[100%]">
+                    <input type="text">
+                    <i class="bi bi-send-check"></i>
+                </div>
+                <!-- input section  -->
+
+            </div>
+            <!-- message and input section in chat interface -->
+
+
+
+        </div>
+        <!-- user section  -->
+
+
+
+</div>
+    </div>
+<!-- virtual pages section  -->
+
+
+
+</div>
+
 <script src="js/general.js"></script>
+<script src="js/index.js"></script>
 <script src="js/socket.js"></script>
 </body>
 </html>

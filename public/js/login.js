@@ -24,6 +24,7 @@ function login(event){
     pop_close('.lds-ellipsis');
 
     if(validator.isEmail(email.value)){
+        
     fetch('http://localhost:3000/login',{
         method: 'POST',
         headers: {
