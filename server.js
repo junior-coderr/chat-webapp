@@ -129,7 +129,7 @@ app.post('/login',async (req,res)=>{
 app.get('/',userAuth,(req,res)=>{
     let d = 'p';
     // req.session.user.fname
-    res.render('index',{name:d});
+    res.render('index',{user:req.session.user});
 }); 
 
 app.post('/logout',(req,res)=>{
@@ -173,6 +173,12 @@ res.json({status:'Something went wrong',})
 }
 })
 
+app.post('/chats/get',async (req,res)=>{
+    console.log(req.body.current_user);
+    let data = await userModel.findOne({email:req.body.current_user});
+   
+    res.json({data:data.friends});
+})
 
 const io = new Server(server,{
     cors:{
@@ -188,11 +194,15 @@ const io = new Server(server,{
 io.on('connection',(socket)=>{
 
 console.log('new connection  id: ' + socket.id);
+
+socket.on('add_user_to_userlist',(data)=>{
+    
+     userModel.updateOne({email: data.current_user},{$push:{friends:{username:data.username,name:data.name}}}).then((user)=>{
+        console.log(user);
+     });
+})
 });
 
-// setInterval(() => {
-// io.emit('ping','data'+Math.random()+100);
-// },1000);
 
 
 

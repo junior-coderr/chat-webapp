@@ -9,6 +9,13 @@ let dynamic_custom_message =document.querySelector('.dynamic-custom-message');
 let no_user_found =document.querySelector('.no-user-found');
 let n =document.querySelector('.n');
 
+let current_user = document.querySelector('.head-name').dataset.email;
+console.log(current_user);      
+
+
+
+let focused_user={};
+
 
 function logout(){
   pop_close('.lds-ellipsis');
@@ -44,20 +51,16 @@ fetch('http://localhost:3000/logout',{
 
 }
 
-
-
 function pop_close(elem_class){
     let elem=document.querySelector(elem_class);
     elem.classList.toggle('hidden');
     console.log('pop_close')
-  }
+}
 
   function close_msg(){
     pop_close('.msg');
     loaderContainer.style.display='none';
-  }
-
-
+}
 
 function oc_page(element,oc){
     document.querySelector(element).classList.toggle('oc-page-anim');
@@ -90,8 +93,6 @@ function virtual_oc_page(from,to,){
     document.querySelector(to).classList.toggle('oc-page-anim');
 }
 
-
-
 function search_user(){
 
 
@@ -116,8 +117,10 @@ function search_user(){
             console.log(data)
             user.style.display = 'flex';
             name.innerText = data.firstname + ' ' + data.lastname;
-            
+
             name.dataset.name=data.firstname + ' ' + data.lastname.slice(0,1);
+            name.dataset.username=data.username;
+
 
             username.innerText = data.username;
             no_user_found.style.display = 'none';
@@ -150,7 +153,79 @@ function search_user(){
 
 
 user.addEventListener('click',()=>{
+    focused_user={
+        current_user,
+        name:name.dataset.name,
+        username:name.dataset.username,
+    }
     
     n.innerText=name.dataset.name;
     
-    });
+});
+
+function chat_person_maker(name,username){
+
+    const chat_p = document.createElement('div');
+    const icon = document.createElement('i');
+    const g_div = document.createElement('div');
+    const  c_name = document.createElement('h3');
+    const c_username = document.createElement('p');
+
+    const chat_list = document.querySelector('.chat-people-list');
+
+    chat_p.classList.add('chat-person');
+    icon.classList.add('bi');
+    icon.classList.add('bi-person-fill');
+    icon.classList.add('chat-i');
+    c_name.classList.add('chat-name');
+    c_username.classList.add('chat-username');
+
+    chat_list.appendChild(chat_p);
+    chat_p.appendChild(icon);
+    chat_p.appendChild(g_div);
+    g_div.appendChild(c_name);
+    g_div.appendChild(c_username);
+
+    c_name.innerText=name;
+    c_username.innerText=username;
+    console.log(name)
+    console.log(username)
+}
+
+
+
+
+
+(function get_all_the_chats(){
+    fetch('http://localhost:3000/chats/get',{
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method:'POST',
+        body:JSON.stringify({current_user})
+    }).then((response)=> response.json())
+    .then((data)=>{
+        console.log(data.data);
+        if(data.data.length > 0){
+            document.querySelector('.chat-load').style.display='none';
+            document.querySelector('.no-chat-msg').style.display='none';
+
+            document.querySelector('.chat-people-list').style.display='flex';
+
+            data.data.forEach((chat)=>{
+                chat_person_maker(chat.name, chat.username);
+            })
+
+        }else{
+            document.querySelector('.chat-load').style.display='none';
+            document.querySelector('.no-chat-msg').style.display='block';
+        }
+    })
+})()
+
+async function add_user_to_list(){
+    const socket = await io('http://localhost:3000',{
+    reconnectionDelay: 3000
+});
+socket.emit('add_user_to_userlist',focused_user);
+}

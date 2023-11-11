@@ -12,7 +12,8 @@ const userSchema = new mongoose.Schema({
     email:{
         type:String,
         required:true,
-        unique:[true,'This is the email address already registered'],
+        unique:[true,'Email must be unique'],
+        lowercase:true
     },
     password:{
         type:String,
@@ -23,6 +24,11 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true,
         unique:[true,'This username is already taken'],
+    },
+    friends:{
+        type:Array,
+        default:[],
+        sparse:true
     },
     }, {timestamps:true});
 

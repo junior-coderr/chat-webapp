@@ -31,7 +31,7 @@ function login(event){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            email: email.value,
+            email: email.value.toLowerCase(),
             password: password.value
         })
     })

@@ -8,6 +8,8 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+   
     <title>Document</title>
 </head>
 <body>
@@ -16,22 +18,77 @@
 
                 <!-- {{!-- section 1 --}} -->
                 <div class="flex justify-between p-3">
-                    <div class="flex items-baseline gap-1"><span class="text-2xl sm:text-3xl">Hey, </span><h2 class="text-3xl sm:text-4xl"><%= name %></h2></div>
-                    <div class="flex items-center gap-8 cursor-pointer"><i class="bi bi-box-arrow-left text-2xl md:text-3xl" onclick="logout()"></i> <i onclick="oc_page('.search-container','open')" class="bi bi-search text-xl md:text-2xl"></i></div>
-                </div>
-
-                <!-- {{!-- section 2  --}} -->
-                <div class="h-screen">
-                    <div class="h-[100%] flex flex-col justify-center items-center">
-                        <div onclick="oc_page('.search-container','open')" class="bg-[#216FB6] w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] center rounded-full cursor-pointer">
-                        <i class="bi bi-plus-lg text-white text-3xl sm:text-5xl"></i>
+                    <div class="flex items-baseline gap-1 select-none"><span class="text-[22px] sm:text-3xl">Hey, </span><h2 data-email= <%= user.email %> class="head-name text-[30px] sm:text-4xl">  <%= user.fname %></h2></div>
+                    <div class="flex items-center gap-5 sm:gap-8 cursor-pointer">
+                        <i class="bi bi-box-arrow-left text-2xl md:text-3xl" onclick="logout()"></i> 
+                        <div onclick="oc_page('.search-container','open')" class="bg-[#216FB6] plus w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] center rounded-full cursor-pointer">
+                        <i class="bi bi-plus-lg text-white text-[15px] md:text-[22px]"></i>
                         </div>
                     </div>
+                </div>
+
+                <!-- slider  -->
+                <div class="flex p-[15px] py-6 md:py-8 text-[15px] sm:text-[18px] opacity-85 justify-center font-semibold">
+                    <div class="flex gap-4 relative">
+                      
+                        <input type="radio" name="z" id="a" class="hidden">
+                        <input type="radio" name="z" id="b" class="hidden">
+                        
+                        <span class="absolute c w-[45%] h-[2px] bg-[#216FB6] top-[110%] rounded-e-full"></span>
+                    <label for="a" class="cursor-pointer select-none">CHATS</label>
+                    <label for="b" class="cursor-pointer select-none">GROUP</label>
+                    </div>
+                </div>
+                <!-- slider  -->
+
+                <!-- {{!-- section 2  --}} -->
+                <div class="h-screen flex flex-col justify-center items-center">
+               
+                    <!-- chat list section -->
+                    <!-- <div> -->
+                    
+                    <div class="text-3xl font-semibold text-[#b0b0b0] no-chat-msg" style="display: none;">
+                        No Chats Yet
+                    </div>
+
+                    <div class="w-[100%] h-[100%] flex justify-center items-center chat-load">
+                        
+
+                    <div class="lds-ellipsis bg-[#216eb6e2] rounded-full m-auto"><div></div><div></div><div></div><div></div></div>
+                </div>
+
+
+                        <!-- user chat list  -->
+                        <div class="w-[100%] h-[100%] chat-people-list flex flex-col gap-4" style="display: none;">
+
+
+                        <!-- <div class="chat-person">
+                            <i class="bi bi-person-fill chat-i"></i>
+                            <div>
+                                <h3 class="chat-name">Pratik Mishra</h3>
+                                <p class="chat-username">pratik_98</p>
+                            </div>
+                        </div> -->
+            
+
+                        </div>  
+                        <!-- user chat list  -->
+
+
+                    <!-- </div> -->
+                    <!-- chat list section -->
+
+
                 </div>
 
         </div>
   </div>
 
+<!-- 
+  1. display none loader
+  2.add hidden to virtual page section
+  3. add oc-page-anim to user section 
+-->
 
   <div class="loader-container">
 
@@ -58,7 +115,8 @@
 
 
 <!-- virtual pages section  -->
-    <div class="w-[100%] virtual-page-section p-0 h-[100%] bg-[#216FB6] hidden">
+    <div class="w-[100%] virtual-page-section p-0 h-[100%] bg-[#ffffff] hidden">
+        <!-- hidden  -->
     <div class="max-width p-0 m-0 h-[100%]" style="padding:0;">
 
 
@@ -92,8 +150,8 @@
                 <!-- users lsit  -->
                     <div onclick="virtual_oc_page('.search-container','.user-container')" class="w-[100%] user max-w-[510px] m-auto flex justify-start items-center gap-4 p-2 px-4 cursor-pointer hover:bg-[#00000012] rounded-md bg-[#0000000b]">
                         <i class="bi bi-person-fill text-[#216FB6] text-[40px]"></i> <div>
-                            <h3 class="text-[20px] font-semibold name opacity-75">Pratik Mishra</h3>
-                            <p class="username text-[14px]">username</p>
+                            <h3 class="text-[20px] font-semibold name opacity-75"></h3>
+                            <p class="username text-[14px]"></p>
                         </div>
                     </div>
                 <!-- users lsit  -->
@@ -114,7 +172,8 @@
 
 
         <!-- user section  -->
-        <div class="user-container absolute w-[100%] h-[100%] bg-white oc-page-anim">
+        <div class="user-container overflow-auto absolute w-[100%] h-[100%] bg-[#ffffff] flex flex-col items-center justify-end add oc-page-anim"> 
+            <!-- oc-page-anim -->
         
             <div class="back-container p-5 py-3 flex justify-start items-center gap-3 w-[100%]">
                 <i class="bi bi-chevron-left cursor-pointer text-[20px] sm:text-[28px] font-bold" onclick="virtual_oc_page('.user-container','.search-container')"></i>
@@ -123,16 +182,16 @@
 
 
             <!-- message and input section in chat interface -->
-            <div class="w-[100%] h-[100%]">
+            <div class="w-[100%] h-[100%] flex flex-col p-2 md:p-5 overflow-auto">
                
                 <!-- message section  -->
-                <div>
+                <div class=" h-[100%] flex flex-col-reverse gap-1 overflow-auto p-2 md:p-5 text-[20px]">
                     <!-- reciever message  -->
-                    <div></div>
+                    <div class="flex justify-end"><span class="recievers-msg">hey,Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, reprehenderit earum. Incidunt fugit sapiente adipisci laboriosam fugiat sit amet magnam cupiditate unde officiis id autem, ad ea doloribus officia obcaecati expedita repellat harum, ipsum totam eum, sequi vitae.</span></div>
                     <!-- reciever message  -->
                     
                     <!-- sender message  -->
-                    <div></div>
+                    <div class="flex justify-start"><span class="senders-msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod enim aliquam molestias repudiandae veritatis at nulla rem deserunt iure nihil, neque recusandae dolore doloribus maxime nobis? Nulla repudiandae sed placeat.</span></div>
                     <!-- sender message  -->
 
                 </div>
@@ -141,9 +200,9 @@
 
 
                 <!-- input section  -->
-                <div class="w-[100%]">
-                    <input type="text">
-                    <i class="bi bi-send-check"></i>
+                <div class="w-[100%] flex p-3 md:p-5 justify-center items-center gap-2 md:gap-4">
+                   <div class="w-[100%] rounded-full bg-[#00000012] hover:bg-[#0000001b] p-1 pb-2 px-4 md:px-5 flex justify-center items-center"> <textarea class=" w-[100%] h-[35px] md:h-[55px] text-[18px] md:text-[20px] bg-transparent text-area pt-[6px] md:pt-[14px]" type="text" placeholder="Type..."></textarea></div>
+                    <i onclick="add_user_to_list()" class="bi bi-send-check text-[18px] md:text-[25px] cursor-pointer text-white bg-[#216FB6] w-0 h-0 p-[21px] md:p-[28px] rounded-full flex justify-center items-center hover:bg-[#145693] active:scale-110 md:hover:scale-110 transition-all"></i>
                 </div>
                 <!-- input section  -->
 
@@ -165,8 +224,9 @@
 
 </div>
 
-<script src="js/general.js"></script>
-<script src="js/index.js"></script>
+
+<script src="js/general.js" ></script>
 <script src="js/socket.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>

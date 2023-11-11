@@ -3,9 +3,19 @@
     margin: 0;
     box-sizing: border-box;
     transition-duration: 150ms;
+    -webkit-tap-highlight-color: transparent;
 }
 body{
-    background-color: #216FB6;
+    background-color: #ffffff;
+}
+.c{
+  left: 0%;
+transform: translateX(0%);
+}
+#b:checked ~ .c{
+left: 100%;
+transform: translateX(-100%);
+
 }
 .max-width{
     width: 100%;
@@ -13,7 +23,7 @@ body{
     max-width: 1200px;
     /* text-align: center; */
     margin: auto;
-    padding:0 25px;
+    padding:0 10px;
 }
 .center{
     display: flex;
@@ -24,7 +34,7 @@ input{
     width: 100%;
     padding: 12px 20px;
     outline: none;
-    border-radius: 50px;
+    border-radius: 8px;
     background-color: white;
     /* border: 1px solid rgba(0, 0, 0, 0.56); */
 }
@@ -44,6 +54,41 @@ z-index: -1;
 .search-container{
 }
 
+.chat-person:hover{
+  background-color: #00000012;
+}
+.chat-person:active{
+  background-color: #00000012;
+}
+
+.chat-people-list{
+align-items: center;
+}
+.chat-person{
+  width: 100%;
+  max-width: 510px;
+  display: flex;
+  justify-content:flex-start;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px ;
+  background-color:#2015150b;
+  
+}
+.chat-i{
+  font-size: 40px;
+  color: #216FB6;
+}
+.chat-name{
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0.75;
+}
+.chat-username{
+  font-size: 14px;
+}
 .user{
   display: none;
 }
@@ -60,6 +105,33 @@ z-index: -1;
     justify-content: center;
     align-items: center;
     display: none;
+}
+.text-area::placeholder{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-area{
+  outline: none;
+  /* padding-top:13px; */
+  resize: none;
+  /* height: 50px; */
+  border-radius: 5px;
+  /* padding: 10px 10px; */
+
+}
+.recievers-msg{
+  background-color: #00000012;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 50%;
+
+}
+.senders-msg{
+  background-color: #216eb62e;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 50%;
 }
 .lds-ellipsis {
     /* display: inline-block; */

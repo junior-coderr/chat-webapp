@@ -42,9 +42,9 @@ function usernameCheck(){
   let data={
     fname:fname.value,
     lname:lname.value,
-    email:email.value,
+    email:email.value.toLowerCase(),
     password:password.value,
-    username:username_inp.value
+    username:username_inp.value,
   }
 
   const usernameUniqueTest = new Promise((resolve, reject) => {
