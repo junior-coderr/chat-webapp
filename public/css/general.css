@@ -4,6 +4,9 @@
     box-sizing: border-box;
     transition-duration: 150ms;
     -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+}
+.cpp{
 }
 body{
     background-color: #ffffff;
@@ -11,6 +14,7 @@ body{
 .c{
   left: 0%;
 transform: translateX(0%);
+transition-duration: .5s;
 }
 #b:checked ~ .c{
 left: 100%;
@@ -122,16 +126,24 @@ align-items: center;
 }
 .recievers-msg{
   background-color: #00000012;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 15px;
+  border-radius: 10px 0px 10px 10px;
+  word-wrap: break-word;
   max-width: 50%;
-
+  margin: 10px 0;
+  
 }
 .senders-msg{
   background-color: #216eb62e;
-  padding: 10px;
-  border-radius: 5px;
+  border-radius: 0px 10px 10px 10px;
+  word-wrap: break-word;
+  padding: 15px;
   max-width: 50%;
+  margin: 10px 0;
+
+}
+.chat-msg-container::-webkit-scrollbar{
+  display: none;
 }
 .lds-ellipsis {
     /* display: inline-block; */
