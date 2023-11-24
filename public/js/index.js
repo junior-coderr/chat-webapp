@@ -41,7 +41,7 @@ function chat_message_maker(msg,type){
 
     chat_msg_parent.style.display = 'flex';
 
-    if(type=='sent'){
+    if(type==current_user){
         chat_msg_parent.style.justifyContent = 'flex-end';
         chat_msg_span.classList.add('recievers-msg');
     }else{
@@ -49,13 +49,19 @@ function chat_message_maker(msg,type){
         chat_msg_span.classList.add('senders-msg');
     }
 
+
     chat_msg_span.innerText=msg;
         
     document.querySelector('.chat-msg-container').appendChild(chat_msg_parent);
     chat_msg_parent.appendChild(chat_msg_span);
+
+
+    chat_msg_container.scrollTop = chat_msg_container.scrollHeight;
+
+
+   
         
 }
-
 
 
 
@@ -148,10 +154,11 @@ function virtual_oc_page(from,to,){
 
 
 
-function search_user(){
+function search_user(event){
 
 
     if(!validator.isEmpty(username_search_inp.value,{ignore_whitespace: true})){
+        if(event == undefined || event.key == 'Enter'){
 
     dynamic_custom_message.style.display='flex';
 
@@ -184,6 +191,10 @@ function search_user(){
             no_user_found.style.display = 'none';
 
 
+            username_search_inp.blur();
+            console.log('username_search_inp')
+
+
 
 
         }else if(data.status == 'failed'){
@@ -207,35 +218,12 @@ function search_user(){
     })
 
 
-
 }
 }
+}
 
 
 
-
-user.addEventListener('click',()=>{
-    focused_user={
-        current_user,
-        name:name.dataset.name,
-        username:username.dataset.username,
-    }
-    let cut_name = name.dataset.name.split(' ');
-    // updating back arrow name 
-    n.innerText=cut_name[0]+' '+cut_name[1].slice(0,1);
-    // updating back arrow name 
-
-
-
-    back_button.removeEventListener('click',callback);
-
-    callback=()=>{
-        // console.log('a')
-        virtual_oc_page('.user-container','.search-container');
-    }
-    back_button.addEventListener('click',callback);
-    
-});
 
 
 
@@ -325,12 +313,76 @@ function chat_person_maker(name,username){
 
 
 
+user.addEventListener('click',async ()=>{
+    focused_user={
+        current_user,
+        name:name.dataset.name,
+        username:username.dataset.username,
+    }
+
+    let cut_name = name.dataset.name.split(' ');
+    // updating back arrow name 
+    n.innerText=cut_name[0]+' '+cut_name[1].slice(0,1);
+    // updating back arrow name 
+
+    console.log('correct!!!');
+
+
+    back_button.removeEventListener('click',callback);
+
+
+    callback=()=>{
+        // console.log('a')
+        virtual_oc_page('.user-container','.search-container');
+
+        document.querySelector('.chat-msg-container').innerHTML='';
+        document.querySelector('.chat-input').value='';
+
+        connection.disconnect();
+
+    }
+    back_button.addEventListener('click',callback);
+
+
+    connection= await io('http://localhost:3000',{
+        reconnectionDelay: 3000
+    });
+
+
+    let room_name = chat_room_name_gen(focused_user.current_user,focused_user.username);
+
+
+    connection.emit('user_connected',room_name,focused_user);
+
+
+
+
+    connection.on('chatMessage', function (result){
+        console.log('chatMessage ',result);
+        if(result != null){
+
+        for(let i = 0; i<result.messages.length; i++){
+            let message_obj = result.messages[i];
+            chat_message_maker(message_obj.message,message_obj.name);
+
+        }
+    }
+    })
+    
+});
+
+
+
 
 async function added_list_chat_opener(){
     loaderContainer.style.display='flex';
     virtual_page_section.classList.toggle('hidden');
 
     virtual_oc_page('none','.user-container');
+
+    document.querySelector('.message-loader').style.display='block';
+
+    console.log('ok');
 
     // data update 
     focused_user={
@@ -366,7 +418,7 @@ async function added_list_chat_opener(){
 
     connection.on('recieve-msg',(msg)=>{
         console.log(msg)
-        chat_message_maker(msg,'recieved');
+        chat_message_maker(msg.mesaage,'recieved');
         chat_msg_container.scrollTop = chat_msg_container.scrollHeight;
 
 
@@ -381,9 +433,38 @@ async function added_list_chat_opener(){
         document.querySelector('.add-btn').style.display='flex';
 
 
+        document.querySelector('.chat-msg-container').innerHTML='';
+        document.querySelector('.chat-input').value='';
+
+
+        document.querySelector('.message-loader').style.display='none';
+
+
+
         connection.disconnect();
     // console.log('c')
         }
+
+
+
+    connection.on('chatMessage', function (result){
+        if(result != null){
+            // console.log('res::',result);
+    
+
+        for(let i = 0; i<result.messages.length; i++){
+            let message_obj = result.messages[i];
+            chat_message_maker(message_obj.message,message_obj.name);
+
+        }
+
+        document.querySelector('.message-loader').style.display='none';
+
+
+
+        }
+    })
+
     
 
         back_button.addEventListener('click',callback);
@@ -417,6 +498,7 @@ async function add_user_to_list(){
         // console.log('pa:',all_users.length);
         
         if(!all_users.some((user) =>  user.username === focused_user.username) ){
+            
             chat_person_maker(focused_user.name,focused_user.username);
             all_users.push(focused_user);
 
@@ -435,7 +517,8 @@ async function add_user_to_list(){
             document.querySelector('.chat-people-list').style.display='flex';
             }
 
-        }
+        
+    }
       
 
     // }
@@ -443,32 +526,38 @@ async function add_user_to_list(){
 
 
 
-async function send_msg(){
+async function send_msg(event){
+
 
     let chat_input = document.querySelector('.chat-input');
 
     if(!validator.isEmpty(chat_input.value,{ignore_whitespace:true})){
-        // console.log('Please enter');
+
+
+        if(event.key == undefined || event.key == 'Enter'){
 
         let room_name = chat_room_name_gen(focused_user.current_user,focused_user.username);
 
 
-        
-        connection.emit('send_msg',room_name,chat_input.value);
+       
+        connection.emit('send_msg',room_name,chat_input.value,focused_user);
 
-        chat_message_maker(chat_input.value,'sent')
+        chat_message_maker(chat_input.value,current_user);
+
         chat_msg_container.scrollTop = chat_msg_container.scrollHeight;
 
+      
         chat_input.value='';
+
         console.log('chat sent')
 
 
 
-
-
+        }
 
     }
     
 }
+
 
 document.querySelector('.send-btn').addEventListener('click',send_msg);

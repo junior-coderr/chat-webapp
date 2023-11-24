@@ -6,8 +6,7 @@
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
 }
-.cpp{
-}
+
 body{
     background-color: #ffffff;
 }
@@ -54,15 +53,22 @@ z-index: -1;
  /* transition-duration: 2s; */
  /* top: 100%; */
 }
-
-.search-container{
+.user,.chat-person{
+transition-duration: 150ms;
 }
+
+.chat-person{
+
+}
+
+
 
 .chat-person:hover{
   background-color: #00000012;
 }
 .chat-person:active{
   background-color: #00000012;
+  transform: scale(0.98);
 }
 
 .chat-people-list{

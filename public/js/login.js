@@ -41,6 +41,9 @@ function login(event){
             loaderContainer.style.display='none';
             pop_close('.lds-ellipsis');
             window.location.href = data.next;
+
+            email.blur();
+            password.blur();
             
         }else{
             pop_close('.lds-ellipsis');

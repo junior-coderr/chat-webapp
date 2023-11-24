@@ -142,7 +142,7 @@
 
         <div class="inp-container p-5 relative flex justify-center items-center">
            
-            <input type="text" placeholder="Username" class="bg-[#eeeeee] w-[100%] max-w-[450px] rounded-lg rounded-r-none border-solid border-[1px] h-[50px] border-[#00000023] username_search_inp">
+            <input type="text" onkeydown="search_user(event)" placeholder="Username" class="bg-[#eeeeee] w-[100%] max-w-[450px] rounded-lg rounded-r-none border-solid border-[1px] h-[50px] border-[#00000023] username_search_inp">
             
             <i onclick="search_user()" class="bi bi-search bg-[#216FB6] cursor-pointer text-white rounded-r-lg w-[60px] flex justify-center items-center right-0 h-[50px] text-center"></i>
         </div>
@@ -197,13 +197,25 @@
 
             <!-- message and input section in chat interface -->
             <div class="w-[100%] h-[100%] flex flex-col p-2 md:p-5 overflow-auto">
-               
+
+
+
+                <!-- Loader  -->
+                <div class="message-loader max-w-[1200px] top-[50%] left-[50%] absolute w-[100%] z-10 rounded-md hidden">
+                    <div style="transform: translateX(-50%);" class="lds-ellipsis bg-[#0000001e] rounded-full "><div></div><div></div><div></div><div></div></div>
+                </div>
+                <!-- Loader  -->
+
+
+
+
                 <!-- message section  -->
                 <div class=" h-[100%] w-[100%] chat-msg-container  flex-col justify-end gap-1 overflow-auto p-2 md:p-5 text-[20px]">
                     <!-- reciever message  -->
                     <!-- <div class="flex justify-end"><span class="recievers-msg">hey,Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, reprehenderit earum. Incidunt fugit sapiente adipisci laboriosam fugiat sit amet magnam cupiditate unde officiis id autem, ad ea doloribus officia obcaecati expedita repellat harum, ipsum totam eum, sequi vitae.</span></div> -->
                     <!-- reciever message  -->
-                    
+                   
+
                     <!-- sender message  -->
                     <!-- <div class="flex justify-start"><span class="senders-msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod enim aliquam molestias repudiandae veritatis at nulla rem deserunt iure nihil, neque recusandae dolore doloribus maxime nobis? Nulla repudiandae sed placeat.</span></div> -->
                     <!-- sender message  -->
@@ -213,9 +225,10 @@
 
 
 
+
                 <!-- input section  -->
                 <div class="w-[100%] flex p-3 md:p-5 justify-center items-center gap-2 md:gap-4">
-                   <div class="w-[100%] rounded-full bg-[#00000012] hover:bg-[#0000001b] p-1 pb-2 px-4 md:px-5 flex justify-center items-center"> <textarea class="chat-input w-[100%] h-[35px] md:h-[55px] text-[18px] md:text-[20px] bg-transparent text-area pt-[6px] md:pt-[14px]" type="text" placeholder="Type..."></textarea></div>
+                   <div class="w-[100%] rounded-full bg-[#00000012] hover:bg-[#0000001b] p-1 pb-2 px-4 md:px-5 flex justify-center items-center"> <input onkeydown="send_msg(event)" class="chat-input w-[100%] h-[35px] md:h-[55px] text-[18px] md:text-[20px] bg-transparent text-area pt-[6px] md:pt-[14px]" type="text" placeholder="Type..."></input></div>
                     <i class="bi bi-send-check send-btn text-[18px] md:text-[25px] cursor-pointer text-white bg-[#216FB6] w-0 h-0 p-[21px] md:p-[28px] rounded-full flex justify-center items-center hover:bg-[#145693] active:scale-110 md:hover:scale-110 transition-all"></i>
                 </div>
                 <!-- input section  -->

@@ -32,7 +32,8 @@ app.set('view engine','ejs');
 
 
 const userAuth = require('./middleware/userAuth');
-const userModel = require('./models/user.model.js')
+const userModel = require('./models/user.model.js');
+const userMessage = require('./models/userMessage.model.js');
 
 
 
@@ -206,18 +207,47 @@ socket.on('add_user_to_userlist',(data)=>{
      
 })
 
-socket.on('user_connected',(room_name,user)=>{
+socket.on('user_connected',async (room_name,user)=>{
     socket.join(room_name);
     // socket.emit('recieve_msg','abv');
     console.log(user.current_user,"-joined: ",room_name);
 
-    
+    // const result = await userMessage.findOne(
+    //     { username: room_name }, // Your query criteria
+    //     {
+    //         // username:0,
+    //         _id: 0, // Exclude the _id field from the result
+    //         messages: { $slice: [0, 3] } // Retrieve the first element of the messages array
+    //     }
+    //   );
+
+    const result = await userMessage.findOne(
+        { username: room_name } // Your query criteria
+      );
+
+  
+      socket.emit('chatMessage',result);
+
+      console.log(result);
 
 });
 
-socket.on('send_msg',(room_name,data)=>{
+socket.on('send_msg',(room_name,data,focused_user)=>{
     console.log(data);
     socket.to(room_name).emit('recieve-msg',data);
+
+    userMessage.updateOne({username: room_name},{$push:{
+        messages:{
+            name:focused_user.current_user,
+            message:data,
+        }
+    }},{ upsert: true })
+    .then((user)=>{
+        console.log(user);
+     });
+
+   
+   
 });
 
 
