@@ -25,7 +25,7 @@ function login(event){
 
     if(validator.isEmail(email.value)){
         
-    fetch('http://localhost:3000/login',{
+    fetch('chat-4g1b.onrender.com/login',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

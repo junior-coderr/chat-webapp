@@ -70,7 +70,7 @@ function logout(){
   pop_close('.lds-ellipsis');
   loaderContainer.style.display='flex';
   
-fetch('http://localhost:3000/logout',{
+fetch('chat-4g1b.onrender.com/logout',{
     headers: {
         'Content-Type': 'application/json'
     },
@@ -163,7 +163,7 @@ function search_user(event){
     dynamic_custom_message.style.display='flex';
 
 
-    fetch('http://localhost:3000/user/search',{
+    fetch('chat-4g1b.onrender.com/user/search',{
         headers: {
             'Content-Type': 'application/json'
         },
@@ -401,7 +401,7 @@ async function added_list_chat_opener(){
     // updating back arrow name 
 
 
-    connection= await io('http://localhost:3000',{
+    connection= await io('chat-4g1b.onrender.com',{
         reconnectionDelay: 3000
     });
 
@@ -502,7 +502,7 @@ async function add_user_to_list(){
             chat_person_maker(focused_user.name,focused_user.username);
             all_users.push(focused_user);
 
-            connection= await io('http://localhost:3000',{
+            connection= await io('chat-4g1b.onrender.com',{
                 reconnectionDelay: 3000
             });
 

@@ -50,7 +50,7 @@ function usernameCheck(){
   const usernameUniqueTest = new Promise((resolve, reject) => {
 
   
-  fetch('http://localhost:3000/username',{
+  fetch('chat-4g1b.onrender.com/username',{
     method: 'POST',
     headers:{
       'Content-Type':'application/JSON'
