@@ -18,12 +18,12 @@ const corsOptions = {
     optionsSuccessStatus: 204, // No Content for preflight requests
   };
   
+  
+  
+  const app = express();
+  const server = createServer(app);
+  
   app.use(cors(corsOptions));
-
-
-const app = express();
-const server = createServer(app);
-
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
