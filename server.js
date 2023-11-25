@@ -8,7 +8,17 @@ const { Server } = require("socket.io");
 const ejs = require('ejs');
 const mongoose = require('mongoose');
 const destroySession = require('./middleware/destroySession');
+const cors = require('cors');
 
+// Enable CORS with specific options
+const corsOptions = {
+    origin: '*', // Replace with the allowed origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Allow cookies and credentials
+    optionsSuccessStatus: 204, // No Content for preflight requests
+  };
+  
+  app.use(cors(corsOptions));
 
 
 const app = express();
