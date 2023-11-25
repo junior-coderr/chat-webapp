@@ -418,7 +418,7 @@ async function added_list_chat_opener(){
 
     connection.on('recieve-msg',(msg)=>{
         console.log(msg)
-        chat_message_maker(msg.mesaage,'recieved');
+        chat_message_maker(msg,'recieved');
         chat_msg_container.scrollTop = chat_msg_container.scrollHeight;
 
 
