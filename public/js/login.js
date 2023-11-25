@@ -25,7 +25,7 @@ function login(event){
 
     if(validator.isEmail(email.value)){
         
-    fetch('chat-4g1b.onrender.com/login',{
+    fetch('https://chat-4g1b.onrender.com//login',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

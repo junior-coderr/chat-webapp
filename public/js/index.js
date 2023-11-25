@@ -269,7 +269,7 @@ function chat_person_maker(name,username){
 
 
 (function get_all_the_chats(){
-    fetch('http://localhost:3000/chats/get',{
+    fetch('https://chat-4g1b.onrender.com//chats/get',{
         headers: {
             'Content-Type': 'application/json'
         },
@@ -344,7 +344,7 @@ user.addEventListener('click',async ()=>{
     back_button.addEventListener('click',callback);
 
 
-    connection= await io('http://localhost:3000',{
+    connection= await io('https://chat-4g1b.onrender.com/',{
         reconnectionDelay: 3000
     });
 
