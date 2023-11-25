@@ -50,7 +50,7 @@ function usernameCheck(){
   const usernameUniqueTest = new Promise((resolve, reject) => {
 
   
-  fetch('https://chat-4g1b.onrender.com/username',{
+  fetch('https://chat-8953.onrender.com/username',{
     method: 'POST',
     headers:{
       'Content-Type':'application/JSON'
@@ -74,7 +74,7 @@ function usernameCheck(){
 
 console.log('username');
 
-  fetch('https://chat-4g1b.onrender.com/signup',{
+  fetch('https://chat-8953.onrender.com/signup',{
     method: 'POST',
     headers:{
       'Content-Type':'application/JSON'
@@ -154,7 +154,7 @@ function signupSubmit(event){
 
 
 
-    fetch('https://chat-4g1b.onrender.com/email',{
+    fetch('https://chat-8953.onrender.com/email',{
       method: 'POST',
       headers:{
         'Content-Type':'application/JSON'
