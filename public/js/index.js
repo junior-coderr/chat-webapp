@@ -560,4 +560,23 @@ async function send_msg(event){
 }
 
 
+let move =null;
+
+function keyboard(t){
+
+    if(t=='focused'){
+        move=(e)=>{
+            console.log('moved')
+            document.querySelector('.chat-input').blur();
+        }
+        chat_msg_container.addEventListener('touchmove',move);
+         
+
+    }else{
+        console.log('stoped')
+        chat_msg_container.removeEventListener('touchmove',move);
+        move=null;
+    }
+}
+
 document.querySelector('.send-btn').addEventListener('click',send_msg);
