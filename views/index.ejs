@@ -229,7 +229,7 @@
 
                 <!-- input section  -->
                 <div class="w-[100%] flex p-3 md:p-5 justify-center items-center gap-2 md:gap-4">
-                   <div class="w-[100%] rounded-full bg-[#00000012] hover:bg-[#0000001b] p-1 pb-2 px-4 md:px-5 flex justify-center items-center"> <input onkeydown="send_msg(event)" class="chat-input w-[100%] h-[35px] md:h-[55px] text-[18px] md:text-[20px] bg-transparent text-area pt-[6px] md:pt-[14px]" type="text" placeholder="Type..."></input></div>
+                   <div class="w-[100%] rounded-full bg-[#00000012] hover:bg-[#0000001b] p-1 pb-2 px-4 md:px-5 flex justify-center items-center"> <input onkeydown="send_msg(event)" class="chat-input w-[100%] h-[35px] md:h-[55px] text-[18px] md:text-[20px] bg-transparent text-area pt-[6px] md:pt-[14px]" type="text" placeholder="Type..." onfocus="keyboard('focused')" onblur="keyboard('blured')"></input></div>
                     <i class="bi bi-send-check send-btn text-[18px] md:text-[25px] cursor-pointer text-white bg-[#216FB6] w-0 h-0 p-[21px] md:p-[28px] rounded-full flex justify-center items-center hover:bg-[#145693] active:scale-110 md:hover:scale-110 transition-all"></i>
                 </div>
                 <!-- input section  -->
